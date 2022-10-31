@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">COMP3330-project</string>
+
+    <string-array name="categories_array">
+        <item>Poultry</item>
+        <item>Snacks</item>
+        <item>Dairy</item>
+        <item>Baked Goods</item>
+        <item>Canned Goods</item>
+    </string-array>
+
+    <string-array name="reminder_array">
+        <item>1 day</item>
+        <item>3 days</item>
+        <item>7 days</item>
+        <item>30 days</item>
+    </string-array>
 </resources>
