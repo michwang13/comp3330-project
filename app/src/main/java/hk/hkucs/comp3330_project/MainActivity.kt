@@ -9,9 +9,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         // first launch -> enter info
-        val i = Intent(this, ManualInputActivity::class.java)
+        val i = Intent(this, ListPageActivity::class.java)
         startActivity(i)
     }
 }

@@ -1,15 +1,14 @@
 package hk.hkucs.comp3330_project
 
-import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
+import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.Editable
+import android.util.Log
 import android.view.View
 import android.widget.*
-import android.app.DatePickerDialog
-import android.database.Cursor
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import java.util.*
-import android.database.sqlite.SQLiteDatabase
+
 
 class ManualInputActivity : AppCompatActivity() {
     private var itemName: String? = null
@@ -22,6 +21,7 @@ class ManualInputActivity : AppCompatActivity() {
     private var notesEditText: EditText? = null
     private var categoriesSpinner: Spinner? = null
     private var reminderSpinner: Spinner? = null
+    private var itemImageView: ImageView? = null
 
     private var datePickerButton: Button? = null
 
@@ -38,7 +38,32 @@ class ManualInputActivity : AppCompatActivity() {
         setContentView(R.layout.activity_manual_input)
 
         initializeViews()
-        initializeCurrentDate()
+
+        val bundle: Bundle? = intent.extras
+
+        bundle?.let {
+
+            bundle.apply {
+                val itemName: String? = getString("name")
+                itemName?.let {
+                    updateItemName(itemName)
+
+                }
+
+                val expDate: String? = getString("exp")
+                expDate?.let {
+                    setExpiryDate(expDate)
+                }
+                updateDatePicker()
+
+                val imgId: Int = getIntent().getIntExtra("imgId", 0);
+                imgId?.let { updateImageId(imgId) }
+
+            }
+        } ?: run {
+            initializeCurrentDate()
+        }
+
         dbhelper = DBHelper(this)
 
 
@@ -73,8 +98,27 @@ class ManualInputActivity : AppCompatActivity() {
         updateDatePicker()
     }
 
+    private fun setExpiryDate(expDate: String){
+
+        val dateTemp = expDate.split("/")
+        day = Integer.parseInt(dateTemp[0])
+        month = Integer.parseInt(dateTemp[1])
+        year = Integer.parseInt("20"+dateTemp[2])
+
+    }
+
+    fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
+
     private fun updateDatePicker(){
         datePickerButton?.text = makeDateString()
+    }
+
+    private fun updateItemName(name: String){
+        itemNameEditText?.setText(name.toEditable())
+    }
+
+    private fun updateImageId(imgId: Int){
+        itemImageView?.setImageResource(imgId)
     }
 
      fun openDatePickerDialog(view: View) {
@@ -117,13 +161,14 @@ class ManualInputActivity : AppCompatActivity() {
         categoriesSpinner = findViewById(R.id.categories_spinner)
         reminderSpinner = findViewById(R.id.reminder_spinner)
         datePickerButton = findViewById(R.id.datePickerButton)
+        itemImageView = findViewById(R.id.itemImageView)
     }
     fun onDoneButtonClicked(view: View) {
         val itemDone = Item(itemNameEditText!!.text.toString(),
             notesEditText!!.text.toString(),
             categoriesSpinner!!.selectedItem.toString(),
             makeDateString(),
-            reminderSpinner!!.selectedItem.toString()
+            reminderSpinner!!.selectedItem.toString(), 0
             )
 
 
