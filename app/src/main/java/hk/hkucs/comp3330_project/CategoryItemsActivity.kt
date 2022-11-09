@@ -1,69 +1,43 @@
 package hk.hkucs.comp3330_project
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Button
+import android.view.View
 import android.widget.ImageButton
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import hk.hkucs.comp3330_project.databinding.ActivityListPageBinding
+import hk.hkucs.comp3330_project.databinding.ActivityCategoryItemsBinding
 
-class ListPageActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityListPageBinding
+
+class CategoryItemsActivity : AppCompatActivity()  {
+    private lateinit var binding: ActivityCategoryItemsBinding
     private lateinit var itemArrayList : ArrayList<Item>
     private lateinit var searchView: SearchView
     private lateinit var sortImageButton: ImageButton
     private var sortExpAscending : Boolean = true
 
+//    private lateinit var categoryHeader: TextView
+//    private var categoryNameHeader: TextView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityListPageBinding.inflate(layoutInflater)
+        binding = ActivityCategoryItemsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //  dummy data
-        val imageId = intArrayOf(
-            R.drawable.dummy_image,
-            R.drawable.egg_image,
-            R.drawable.dummy_image,
-            R.drawable.egg_image,
-            R.drawable.dummy_image,
-            R.drawable.egg_image,
-            R.drawable.dummy_image,
-            R.drawable.egg_image,
-            R.drawable.dummy_image,
-        )
+        val bundle: Bundle? = intent.extras
+        bundle?.let {
+            bundle.apply {
+                val categoryName: String? = getString("categoryName")
+                categoryName?.let {
+                    updateCategoryName(categoryName)
+                }
 
-        val itemName = arrayOf(
-            "Meiji milk",
-            "Eggs",
-            "Meiji milk",
-            "Eggs",
-            "Meiji milk",
-            "Eggs",
-            "Meiji milk",
-            "Eggs",
-            "Meiji milk"
-        )
-
-        val expiryDate = arrayOf(
-            "22/12/22",
-            "10/11/22",
-            "22/12/22",
-            "10/11/22",
-            "22/12/22",
-            "10/11/22",
-            "22/12/22",
-            "10/11/22",
-            "22/12/22",
-        )
-
-        itemArrayList = ArrayList()
-        for (i in itemName.indices){
-            val item = Item(itemName = itemName[i], expiryDate = expiryDate[i], imageId = imageId[i],
-                category = "", reminder = "", notes = "")
-            itemArrayList.add(item)
+                val categoryItems = getSerializable("categoryItems") as ArrayList<Item>?
+                categoryItems?.let {
+                    updateCategoryItems(categoryItems)
+                }
+            }
         }
 
         val customItemAdapter = ItemAdapter(this, itemArrayList)
@@ -79,6 +53,7 @@ class ListPageActivity : AppCompatActivity() {
             i.putExtra("exp", exp)
             i.putExtra("imgId", imgId)
             startActivity(i)
+
         }
 
         customItemAdapter.sortByExpiryDate(sortExpAscending)
@@ -102,6 +77,19 @@ class ListPageActivity : AppCompatActivity() {
             else sortImageButton.setImageResource(R.drawable.keyboard_arrow_down)
 
             customItemAdapter.sortByExpiryDate(sortExpAscending)
+        }
+
+    }
+
+    private fun updateCategoryName(name: String){
+        val categoryHeader : TextView = findViewById(R.id.header_name)
+        categoryHeader.text = name
+    }
+
+    private fun updateCategoryItems(items: ArrayList<Item>){
+        itemArrayList = ArrayList()
+        for (i in items){
+            itemArrayList.add(i)
         }
     }
 }

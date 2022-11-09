@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // first launch -> enter info
-        val i = Intent(this, ListPageActivity::class.java)
+        val i = Intent(this, CategoriesActivity::class.java)
         startActivity(i)
     }
 }
