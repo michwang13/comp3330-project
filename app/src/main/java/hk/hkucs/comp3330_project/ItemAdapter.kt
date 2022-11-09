@@ -1,7 +1,6 @@
 package hk.hkucs.comp3330_project
 
 import android.app.Activity
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,7 @@ class ItemAdapter(private val context : Activity, private val arrayList: ArrayLi
         val itemName : TextView = view.findViewById(R.id.itemName)
         val expDate : TextView = view.findViewById(R.id.expiryDate)
 
-        imageView.setImageResource(arrayList[position].imageId)
+        arrayList[position].imageId?.let { imageView.setImageResource(it) }
         itemName.text = arrayList[position].itemName
         expDate.text = arrayList[position].expiryDate
 
