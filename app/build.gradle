@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "hk.hkucs.comp3330_project"
-        minSdk 28
+        minSdk 30
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -37,6 +37,9 @@ dependencies {
     // to use these two lines of implementation rather than the commented ones
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.0'
+    implementation 'androidx.activity:activity-compose:1.6.1'
+    implementation 'androidx.activity:activity-ktx:1.6.1'
+    implementation 'androidx.activity:activity:1.6.1'
 
     implementation 'androidx.core:core-ktx:1.9.0'
 //    implementation 'androidx.appcompat:appcompat:1.5.1'
