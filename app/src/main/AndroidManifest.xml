@@ -13,6 +13,9 @@
             android:name=".ManualInputActivity"
             android:exported="false" />
         <activity
+            android:name=".DummyCrud"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

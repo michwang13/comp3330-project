@@ -39,7 +39,7 @@ class ManualInputActivity : AppCompatActivity() {
 
         initializeViews()
         initializeCurrentDate()
-        dbhelper = DBHelper(this)
+        dbhelper = DBHelper(this, null)
 
 
         // initialize the categories spinner to include poultry, dairy goods, etc
@@ -119,12 +119,14 @@ class ManualInputActivity : AppCompatActivity() {
         datePickerButton = findViewById(R.id.datePickerButton)
     }
     fun onDoneButtonClicked(view: View) {
-        val itemDone = Item(itemNameEditText!!.text.toString(),
+        val itemDone = Item(
+            "",
+            itemNameEditText!!.text.toString(),
             notesEditText!!.text.toString(),
             categoriesSpinner!!.selectedItem.toString(),
             makeDateString(),
             reminderSpinner!!.selectedItem.toString()
-            )
+        )
 
 
         Log.d("TAG","itemName: " + itemNameEditText?.text.toString())
@@ -134,6 +136,9 @@ class ManualInputActivity : AppCompatActivity() {
         Log.d("TAG","reminder: " + reminderSpinner?.selectedItem.toString())
 
         dbhelper?.insertItem(itemDone)
+
+
+
 
         // below code is for sample use only
 //        val cursor = dbhelper?.queryData();

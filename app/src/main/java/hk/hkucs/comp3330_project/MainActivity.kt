@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
 
 
         // first launch -> enter info
-        val i = Intent(this, ManualInputActivity::class.java)
+        val i = Intent(this, DummyCrud::class.java)
         startActivity(i)
     }
 }
