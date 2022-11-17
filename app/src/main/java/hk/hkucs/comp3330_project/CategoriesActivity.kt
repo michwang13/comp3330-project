@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import hk.hkucs.comp3330_project.databinding.ActivityCategoriesBinding
 import java.util.*
 import kotlin.collections.ArrayList
@@ -97,6 +98,24 @@ class CategoriesActivity : AppCompatActivity() {
                 return false
             }
         })
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView.setSelectedItemId(R.id.categories)
+
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.items -> {
+                    startActivity(Intent(this, ListPageActivity::class.java))
+                }
+                R.id.scan -> {
+                    startActivity(Intent(this, ListPageActivity::class.java))
+                }
+                R.id.categories -> {
+                    startActivity(Intent(this, CategoriesActivity::class.java))
+                }
+            }
+            true
+        }
 
 //        editButton = findViewById(R.id.edit_button)
 //        editButton.setOnClickListener{

@@ -5,237 +5,256 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <ScrollView
-        android:id="@+id/scrollView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:id="@+id/upperLayout"
                 android:layout_width="match_parent"
-                android:layout_height="190dp"
-                android:orientation="vertical"
-                android:padding="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:background="@color/primary_blue"
-                >
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/itemImageView"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/dummy_image"
-                    app:layout_constraintBottom_toTopOf="@+id/editPhotoButton"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
-
-                <Button
-                    android:id="@+id/editPhotoButton"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:text="Edit Photo"
+                <LinearLayout
+                    android:id="@+id/upperLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="190dp"
+                    android:orientation="vertical"
+                    android:padding="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/itemImageView"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lowerLayout"
-                android:layout_width="match_parent"
-                android:layout_height="544dp"
-                android:orientation="vertical"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:paddingLeft="40dp"
-                android:paddingRight="40dp"
-                >
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="15dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@color/primary_blue"
                     >
-                    <TextView
-                        android:id="@+id/itemNameTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Item name"
-                        android:paddingLeft="10dp"
+
+                    <ImageView
+                        android:id="@+id/itemImageView"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/dummy_image"
+                        app:layout_constraintBottom_toTopOf="@+id/editPhotoButton"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
-                        android:orientation="vertical"
-                        android:background="@drawable/border"
-                        >
-                    <EditText
-                        android:id="@+id/itemNameEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
-                        android:padding="10dp"
+                    <Button
+                        android:id="@+id/editPhotoButton"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:text="Edit Photo"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/itemImageView"
                         />
-                    </LinearLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/lowerLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="544dp"
                     android:orientation="vertical"
-                    android:layout_marginBottom="15dp"
-                    >
-                    <TextView
-                        android:id="@+id/notesTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Notes (optional)"
-                        android:paddingLeft="10dp"
-                        />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
-                        android:orientation="vertical"
-                        android:background="@drawable/border"
-                        >
-                    <EditText
-                        android:id="@+id/notesEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
-                        android:paddingLeft="10dp"
-                        />
-                    </LinearLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="15dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
                     >
 
-                    <TextView
-                        android:id="@+id/categoryTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Category"
-                        android:paddingLeft="10dp"
-                        />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
+                        android:layout_height="60dp"
                         android:orientation="vertical"
-                        android:background="@drawable/border"
+                        android:layout_marginBottom="15dp"
                         >
+                        <TextView
+                            android:id="@+id/itemNameTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Item name"
+                            android:paddingLeft="10dp"
+                            />
 
-                        <Spinner
-                            android:id="@+id/categories_spinner"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
-                            android:padding="5dp" />
+                            android:orientation="vertical"
+                            android:background="@drawable/border"
+                            >
+                        <EditText
+                            android:id="@+id/itemNameEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:padding="10dp"
+                            />
+                        </LinearLayout>
+
                     </LinearLayout>
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="15dp"
-                    >
-                    <TextView
-                        android:id="@+id/expiryDateTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Expiry date"
-                        android:paddingLeft="10dp"
-
-                        />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
+                        android:layout_height="60dp"
                         android:orientation="vertical"
-                        android:background="@drawable/border"
+                        android:layout_marginBottom="15dp"
                         >
+                        <TextView
+                            android:id="@+id/notesTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Notes (optional)"
+                            android:paddingLeft="10dp"
+                            />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="vertical"
+                            android:background="@drawable/border"
+                            >
+                        <EditText
+                            android:id="@+id/notesEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:paddingLeft="10dp"
+                            />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="15dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/categoryTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Category"
+                            android:paddingLeft="10dp"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="vertical"
+                            android:background="@drawable/border"
+                            >
+
+                            <Spinner
+                                android:id="@+id/categories_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="fill_parent"
+                                android:padding="5dp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="15dp"
+                        >
+                        <TextView
+                            android:id="@+id/expiryDateTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Expiry date"
+                            android:paddingLeft="10dp"
+
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="vertical"
+                            android:background="@drawable/border"
+                            >
+                        <Button
+                            android:id="@+id/datePickerButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="JAN 01 2020"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:color="#000000"
+                            style="?android:spinnerStyle"
+                            android:onClick="openDatePickerDialog"
+                            />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="15dp"
+                        >
+                        <TextView
+                            android:id="@+id/reminderTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Reminder"
+                            android:paddingLeft="10dp"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="vertical"
+                            android:background="@drawable/border"
+                            >
+                        <Spinner
+                            android:id="@+id/reminder_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:padding="5dp"
+                            />
+                        </LinearLayout>
+                    </LinearLayout>
+
                     <Button
-                        android:id="@+id/datePickerButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="JAN 01 2020"
-                        android:textSize="15sp"
-                        android:textColor="@color/black"
-                        android:color="#000000"
-                        style="?android:spinnerStyle"
-                        android:onClick="openDatePickerDialog"
+                        android:id="@+id/doneButton"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:text="Done"
+                        android:onClick="onDoneButtonClicked"
                         />
-                    </LinearLayout>
 
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="15dp"
-                    >
-                    <TextView
-                        android:id="@+id/reminderTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Reminder"
-                        android:paddingLeft="10dp"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
-                        android:orientation="vertical"
-                        android:background="@drawable/border"
-                        >
-                    <Spinner
-                        android:id="@+id/reminder_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
-                        android:padding="5dp"
-                        />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/doneButton"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:text="Done"
-                    android:onClick="onDoneButtonClicked"
-                    />
 
             </LinearLayout>
 
-        </LinearLayout>
+        </ScrollView>
 
-    </ScrollView>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            app:itemBackground="@color/primary_blue"
+            app:itemIconTint="@drawable/selector"
+            app:itemTextColor="@drawable/selector"
+            app:menu="@menu/menu_navigation"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="671dp">
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
