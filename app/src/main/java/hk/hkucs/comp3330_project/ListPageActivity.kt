@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import hk.hkucs.comp3330_project.databinding.ActivityListPageBinding
 
 class ListPageActivity : AppCompatActivity() {
@@ -102,6 +103,24 @@ class ListPageActivity : AppCompatActivity() {
             else sortImageButton.setImageResource(R.drawable.keyboard_arrow_down)
 
             customItemAdapter.sortByExpiryDate(sortExpAscending)
+        }
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView.setSelectedItemId(R.id.items)
+
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.items -> {
+                    startActivity(Intent(this, ListPageActivity::class.java))
+                }
+                R.id.scan -> {
+                    startActivity(Intent(this, ListPageActivity::class.java))
+                }
+                R.id.categories -> {
+                    startActivity(Intent(this, CategoriesActivity::class.java))
+                }
+            }
+            true
         }
     }
 }

@@ -1,36 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CategoriesActivity">
 
     <LinearLayout
+        android:id="@+id/upperLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:background="@color/primary_blue"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/upperLayout"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/headerName"
+            android:layout_width="267dp"
             android:layout_height="wrap_content"
-            android:background="@color/primary_blue"
-            android:padding="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/headerName"
-                android:layout_width="267dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50sp"
-                android:text="Categories"
-                android:textColor="@color/white"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+            android:layout_marginStart="50sp"
+            android:text="Categories"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
 <!--            <ImageButton-->
 <!--                android:id="@+id/edit_button"-->
@@ -43,32 +40,49 @@
 <!--                app:srcCompat="@drawable/ic_edit" />-->
 
 
-        </LinearLayout>
+    </LinearLayout>
 
-        <SearchView
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="8dp"
-            android:iconifiedByDefault="false"
-            android:padding="4dp"
-            android:queryHint="Search category">
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:iconifiedByDefault="false"
+        android:padding="4dp"
+        android:queryHint="Search category">
 
-        </SearchView>
+    </SearchView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_alignParentBottom="true"
-            android:layout_weight="1"
-            android:background="#D3D3D3" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_weight="1"
+        android:background="#D3D3D3" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <ListView
             android:id="@+id/listview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="486dp"
             android:layout_weight="1"
             android:clickable="true"
             tools:listitem="@layout/list_category" />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="141dp"
+            app:itemBackground="@color/primary_blue"
+            app:itemIconTint="@drawable/selector"
+            app:itemTextColor="@drawable/selector"
+            app:menu="@menu/menu_navigation"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="671dp" />
+
+    </RelativeLayout>
+</LinearLayout>

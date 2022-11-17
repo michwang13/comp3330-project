@@ -94,12 +94,27 @@
             android:layout_height="2dp"
             android:layout_alignParentBottom="true"
             android:background="#D3D3D3" />
-
-        <ListView
-            android:id="@+id/listview"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            tools:listitem="@layout/list_item" />
+            android:layout_height="match_parent">
+            <ListView
+                android:id="@+id/listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                tools:listitem="@layout/list_item" />
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                app:itemBackground="@color/primary_blue"
+                app:itemIconTint="@drawable/selector"
+                app:itemTextColor="@drawable/selector"
+                app:menu="@menu/menu_navigation"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="671dp" />
+        </RelativeLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

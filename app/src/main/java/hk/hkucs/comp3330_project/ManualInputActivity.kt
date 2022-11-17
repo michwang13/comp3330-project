@@ -1,12 +1,14 @@
 package hk.hkucs.comp3330_project
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 import android.database.sqlite.SQLiteDatabase
 import android.media.Image
@@ -115,6 +117,24 @@ class ManualInputActivity : AppCompatActivity() {
                 Log.d("PhotoPicker", "No media selected")
             }
         }
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+//        bottomNavigationView.setSelectedItemId(R.id.items)
+
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.items -> {
+                    startActivity(Intent(this, ListPageActivity::class.java))
+                }
+                R.id.scan -> {
+                    startActivity(Intent(this, ListPageActivity::class.java))
+                }
+                R.id.categories -> {
+                    startActivity(Intent(this, CategoriesActivity::class.java))
+                }
+            }
+            true
+        }
+
     }
 
     private fun initializeCurrentDate(){
