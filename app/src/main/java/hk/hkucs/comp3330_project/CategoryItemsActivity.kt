@@ -16,6 +16,7 @@ class CategoryItemsActivity : AppCompatActivity()  {
     private lateinit var itemArrayList : ArrayList<Item>
     private lateinit var searchView: SearchView
     private lateinit var sortImageButton: ImageButton
+    private lateinit var backButton: ImageButton
     private var sortExpAscending : Boolean = true
 
 //    private lateinit var categoryHeader: TextView
@@ -70,6 +71,11 @@ class CategoryItemsActivity : AppCompatActivity()  {
                 return false
             }
         })
+
+        backButton = findViewById(R.id.back_button)
+        backButton.setOnClickListener{
+            finish()
+        }
 
         sortImageButton = findViewById(R.id.sort_image_button)
         sortImageButton.setOnClickListener{
