@@ -5,8 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ScrollView
+        <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+            <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -33,17 +36,17 @@
                 android:background="@color/primary_blue"
                 >
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/itemImageView"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/dummy_image"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintBottom_toTopOf="@+id/editPhotoButton"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    />
+                    android:src="@drawable/default_img" />
 
                 <Button
                     android:id="@+id/editPhotoButton"
@@ -51,6 +54,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:text="Edit Photo"
+                    android:onClick="onEditPhotoButtonClicked"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -91,12 +95,12 @@
                         android:orientation="vertical"
                         android:background="@drawable/border"
                         >
-                    <EditText
-                        android:id="@+id/itemNameEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
-                        android:padding="10dp"
-                        />
+                        <EditText
+                            android:id="@+id/itemNameEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:padding="10dp"
+                            />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -120,12 +124,12 @@
                         android:orientation="vertical"
                         android:background="@drawable/border"
                         >
-                    <EditText
-                        android:id="@+id/notesEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
-                        android:paddingLeft="10dp"
-                        />
+                        <EditText
+                            android:id="@+id/notesEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:paddingLeft="10dp"
+                            />
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -180,17 +184,17 @@
                         android:orientation="vertical"
                         android:background="@drawable/border"
                         >
-                    <Button
-                        android:id="@+id/datePickerButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="JAN 01 2020"
-                        android:textSize="15sp"
-                        android:textColor="@color/black"
-                        android:color="#000000"
-                        style="?android:spinnerStyle"
-                        android:onClick="openDatePickerDialog"
-                        />
+                        <Button
+                            android:id="@+id/datePickerButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="JAN 01 2020"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:color="#000000"
+                            style="?android:spinnerStyle"
+                            android:onClick="openDatePickerDialog"
+                            />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -214,12 +218,12 @@
                         android:orientation="vertical"
                         android:background="@drawable/border"
                         >
-                    <Spinner
-                        android:id="@+id/reminder_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
-                        android:padding="5dp"
-                        />
+                        <Spinner
+                            android:id="@+id/reminder_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:padding="5dp"
+                            />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -236,6 +240,22 @@
 
         </LinearLayout>
 
-    </ScrollView>
+        </ScrollView>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            app:itemBackground="@color/primary_blue"
+            app:itemIconTint="@drawable/selector"
+            app:itemTextColor="@drawable/selector"
+            app:menu="@menu/menu_navigation"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="671dp">
+
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

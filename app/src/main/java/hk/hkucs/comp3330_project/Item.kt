@@ -1,20 +1,24 @@
 package hk.hkucs.comp3330_project
 
-class Item(itemName: String?, notes: String?, category: String?, expiryDate: String?, reminder: String?, imageId: Int?) {
+import java.util.*
+
+class Item( itemID:String?, itemName: String?, notes: String?, category: String?, expiryDate: String?, reminder: String?, imageURI: String?) {
+    var itemID: String
     var itemName: String
     var notes: String
     var category: String
     var expiryDate: String
     var reminder: String
-    var imageId: Int
+    var imageURI: String
 
     init{
+        this.itemID = itemID ?: UUID.randomUUID().toString()
         this.itemName = itemName ?: ""
         this.notes = notes ?: ""
         this.category = category ?: ""
         this.expiryDate = expiryDate ?: ""
         this.reminder = reminder ?: ""
-        this.imageId = imageId ?: 0
+        this.imageURI = imageURI ?: ""
     }
 
 

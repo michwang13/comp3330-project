@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/list_item">
+    android:id="@+id/list_category">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -18,7 +18,7 @@
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/itemPic"
+                    android:id="@+id/categoryPic"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="20dp"
@@ -28,36 +28,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:gravity="center"
-                    android:layout_alignParentRight="true">
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/itemName"
+                        android:id="@+id/categoryName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Meiji Milk"
+                        android:text="Poultry"
                         android:textColor="@color/black"
                         android:textSize="26sp"
-                        android:textStyle="bold"/>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/circle"
-                        app:tint="@color/green"
-                        android:padding="10dp"
-                        android:id="@+id/warning_icon"/>
-
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
 
             <TextView
-                android:id="@+id/expiryDate"
+                android:id="@+id/categorySize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:layout_marginEnd="-4dp"
                 android:padding="15dp"
-                android:text="10/11/2022" />
+                android:text="0 Item(s)" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"

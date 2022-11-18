@@ -13,7 +13,16 @@
             android:name=".ManualInputActivity"
             android:exported="false" />
         <activity
+            android:name=".DummyCrud"
+            android:exported="false" />
+        <activity
             android:name=".ListPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CategoriesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CategoryItemsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
