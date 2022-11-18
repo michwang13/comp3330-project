@@ -2,7 +2,7 @@ package hk.hkucs.comp3330_project
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.SearchView
 import android.widget.TextView
@@ -18,14 +18,13 @@ class CategoryItemsActivity : AppCompatActivity()  {
     private lateinit var sortImageButton: ImageButton
     private lateinit var backButton: ImageButton
     private var sortExpAscending : Boolean = true
-
-//    private lateinit var categoryHeader: TextView
-//    private var categoryNameHeader: TextView? = null
+    private var dbhelper: DBHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryItemsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        dbhelper = DBHelper(this, null)
 
         val bundle: Bundle? = intent.extras
         bundle?.let {
@@ -33,11 +32,7 @@ class CategoryItemsActivity : AppCompatActivity()  {
                 val categoryName: String? = getString("categoryName")
                 categoryName?.let {
                     updateCategoryName(categoryName)
-                }
-
-                val categoryItems = getSerializable("categoryItems") as ArrayList<Item>?
-                categoryItems?.let {
-                    updateCategoryItems(categoryItems)
+                    itemArrayList = getItemsByCategory(categoryName)
                 }
             }
         }
@@ -46,14 +41,8 @@ class CategoryItemsActivity : AppCompatActivity()  {
         binding.listview.isClickable = true
         binding.listview.adapter = customItemAdapter
         binding.listview.setOnItemClickListener{ parent, view, position, id ->
-            val name = itemArrayList[position].itemName
-            val exp = itemArrayList[position].expiryDate
-            val imgId = itemArrayList[position].imageURI
-
             val i = Intent(this, ManualInputActivity::class.java)
-            i.putExtra("name", name)
-            i.putExtra("exp", exp)
-            i.putExtra("imgId", imgId)
+            i.putExtra("itemID", itemArrayList[position].itemID)
             startActivity(i)
 
         }
@@ -111,10 +100,41 @@ class CategoryItemsActivity : AppCompatActivity()  {
         categoryHeader.text = name
     }
 
-    private fun updateCategoryItems(items: ArrayList<Item>){
-        itemArrayList = ArrayList()
-        for (i in items){
-            itemArrayList.add(i)
+    private fun getItemsByCategory(category: String): ArrayList<Item>{
+        var itemArrayList: ArrayList<Item> = ArrayList()
+        val cursor = dbhelper?.getItemsByCategory(category)
+
+        if(cursor != null && cursor.moveToFirst()){
+            val itemID = cursor.getString(cursor.getColumnIndexOrThrow("ID"))
+            val itemName = cursor.getString(cursor.getColumnIndexOrThrow("itemName"))
+            val expiryDate = cursor.getString(cursor.getColumnIndexOrThrow("expiryDate"))
+            val imageURI = cursor.getString(cursor.getColumnIndexOrThrow("imageURI"))
+            val category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
+            val notes = cursor.getString(cursor.getColumnIndexOrThrow("notes"))
+            val reminder = cursor.getString(cursor.getColumnIndexOrThrow("reminder"))
+
+            var item = Item(itemID = itemID, itemName = itemName, expiryDate = expiryDate, imageURI = imageURI,
+                category = category, reminder = reminder, notes = notes)
+            itemArrayList.add(item)
+            // moving cursor to next position and log next values
+            while(cursor.moveToNext()){
+                var itemID = cursor.getString(cursor.getColumnIndexOrThrow("ID"))
+                var itemName = cursor.getString(cursor.getColumnIndexOrThrow("itemName"))
+                var expiryDate = cursor.getString(cursor.getColumnIndexOrThrow("expiryDate"))
+                var imageURI = cursor.getString(cursor.getColumnIndexOrThrow("imageURI"))
+                var category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
+                var notes = cursor.getString(cursor.getColumnIndexOrThrow("notes"))
+                var reminder = cursor.getString(cursor.getColumnIndexOrThrow("reminder"))
+
+                var item = Item(itemID = itemID, itemName = itemName, expiryDate = expiryDate, imageURI = imageURI,
+                    category = category, reminder = reminder, notes = notes)
+                itemArrayList.add(item)
+            }
+
+            // close cursor
+            cursor.close()
+
         }
+        return itemArrayList
     }
 }

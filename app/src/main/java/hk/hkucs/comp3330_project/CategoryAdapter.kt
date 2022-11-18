@@ -26,14 +26,14 @@ class CategoryAdapter(private val context : Activity, private val arrayList: Arr
         return view
     }
 
-    fun filterName(text: String?) {
-        val text = text!!.lowercase()
+    fun filterName(name: String?) {
+        val text = name!!.lowercase()
         arrayList.clear()
         if (text.isEmpty()) {
             arrayList.addAll(tempCategoryList)
         } else {
             for (i in 0..tempCategoryList.size - 1) {
-                if (tempCategoryList[i].categoryName!!.lowercase().contains(text)) {
+                if (tempCategoryList[i].categoryName.lowercase().contains(text)) {
                     arrayList.add(tempCategoryList.get(i))
                 }
             }

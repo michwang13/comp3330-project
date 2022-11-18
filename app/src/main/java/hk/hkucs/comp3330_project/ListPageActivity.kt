@@ -3,6 +3,7 @@ package hk.hkucs.comp3330_project
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageButton
@@ -17,68 +18,55 @@ class ListPageActivity : AppCompatActivity() {
     private lateinit var searchView: SearchView
     private lateinit var sortImageButton: ImageButton
     private var sortExpAscending : Boolean = true
+    private var dbhelper: DBHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityListPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        //  dummy data
-        val imageId = intArrayOf(
-            R.drawable.dummy_image,
-            R.drawable.egg_image,
-            R.drawable.dummy_image,
-            R.drawable.egg_image,
-            R.drawable.dummy_image,
-            R.drawable.egg_image,
-            R.drawable.dummy_image,
-            R.drawable.egg_image,
-            R.drawable.dummy_image,
-        )
-
-        val itemName = arrayOf(
-            "Meiji milk",
-            "Eggs",
-            "Meiji milk",
-            "Eggs",
-            "Meiji milk",
-            "Eggs",
-            "Meiji milk",
-            "Eggs",
-            "Meiji milk"
-        )
-
-        val expiryDate = arrayOf(
-            "22/12/22",
-            "10/11/22",
-            "22/12/22",
-            "10/11/22",
-            "22/12/22",
-            "10/11/22",
-            "22/12/22",
-            "10/11/22",
-            "22/12/22",
-        )
-
+        dbhelper = DBHelper(this, null)
         itemArrayList = ArrayList()
-        for (i in itemName.indices){
-            val item = Item(itemName = itemName[i], expiryDate = expiryDate[i], imageURI = "",
-                category = "", reminder = "", notes = "")
+
+        val cursor = dbhelper?.getAllItems()
+
+        if(cursor != null && cursor.moveToFirst()){
+            var itemID = cursor.getString(cursor.getColumnIndexOrThrow("ID"))
+            var itemName = cursor.getString(cursor.getColumnIndexOrThrow("itemName"))
+            var expiryDate = cursor.getString(cursor.getColumnIndexOrThrow("expiryDate"))
+            var imageURI = cursor.getString(cursor.getColumnIndexOrThrow("imageURI"))
+            var category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
+            var notes = cursor.getString(cursor.getColumnIndexOrThrow("notes"))
+            var reminder = cursor.getString(cursor.getColumnIndexOrThrow("reminder"))
+
+            var item = Item(itemID = itemID, itemName = itemName, expiryDate = expiryDate, imageURI = imageURI,
+                category = category, reminder = reminder, notes = notes)
             itemArrayList.add(item)
+            // moving cursor to next position and log next values
+            while(cursor.moveToNext()){
+                itemID = cursor.getString(cursor.getColumnIndexOrThrow("ID"))
+                itemName = cursor.getString(cursor.getColumnIndexOrThrow("itemName"))
+                expiryDate = cursor.getString(cursor.getColumnIndexOrThrow("expiryDate"))
+                imageURI = cursor.getString(cursor.getColumnIndexOrThrow("imageURI"))
+                category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
+                notes = cursor.getString(cursor.getColumnIndexOrThrow("notes"))
+                reminder = cursor.getString(cursor.getColumnIndexOrThrow("reminder"))
+
+                 item = Item(itemID = itemID, itemName = itemName, expiryDate = expiryDate, imageURI = imageURI,
+                    category = category, reminder = reminder, notes = notes)
+                itemArrayList.add(item)
+            }
+
+            // close cursor
+            cursor.close()
+
         }
 
         val customItemAdapter = ItemAdapter(this, itemArrayList)
         binding.listview.isClickable = true
         binding.listview.adapter = customItemAdapter
         binding.listview.setOnItemClickListener{ parent, view, position, id ->
-            val name = itemArrayList[position].itemName
-            val exp = itemArrayList[position].expiryDate
-            val imageURI = itemArrayList[position].imageURI
-
             val i = Intent(this, ManualInputActivity::class.java)
-            i.putExtra("name", name)
-            i.putExtra("exp", exp)
-            i.putExtra("imageURI", imageURI)
+            i.putExtra("itemID", itemArrayList[position].itemID)
             startActivity(i)
         }
 

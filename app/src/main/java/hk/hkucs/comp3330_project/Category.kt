@@ -10,7 +10,7 @@ class Category(categoryName: String?, categorySize: Int?, imageId: Int?, categor
         this.categoryName = categoryName ?: ""
         this.categorySize = categorySize ?: 0
         this.imageId = imageId ?: 0
-        this.categoryItems = categoryItems ?: arrayListOf<Item>()
+        this.categoryItems = categoryItems
     }
 
 

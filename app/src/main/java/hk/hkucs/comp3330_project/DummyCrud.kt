@@ -80,7 +80,8 @@ class DummyCrud: AppCompatActivity() {
             "Update Note",
             "Dairy",
             "Nov 18, 2022",
-            "2 day"
+            "2 day",
+            ""
         )
         dbhelper?.updateOneItemByID("958ed99c-8e9d-42f4-bb77-577c760fa9ad", updateItem)
     }

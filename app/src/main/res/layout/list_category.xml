@@ -22,27 +22,13 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="20dp"
-                    android:src="@drawable/dummy_image" />
+                    android:src="@drawable/default_img" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:orientation="vertical">
-
-                    <!--   add the circle icon later     -->
-<!--                    <EditText-->
-<!--                        android:id="@+id/categoryName"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:ems="10"-->
-<!--                        android:inputType="textPersonName"-->
-<!--                        android:background="@null"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:text="Poultry"-->
-<!--                        android:textSize="26sp"-->
-<!--                        android:focusable="false"-->
-<!--                        android:textStyle="bold" />-->
 
                     <TextView
                         android:id="@+id/categoryName"
@@ -62,7 +48,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="-4dp"
                 android:padding="15dp"
-                android:text="2 Item(s)" />
+                android:text="0 Item(s)" />
 
             <View
                 android:layout_width="match_parent"
