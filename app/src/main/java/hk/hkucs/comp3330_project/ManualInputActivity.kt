@@ -10,6 +10,13 @@ import android.database.Cursor
 import android.util.Log
 import java.util.*
 import android.database.sqlite.SQLiteDatabase
+import android.media.Image
+import android.os.Build
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import android.os.ext.SdkExtensions.getExtensionVersion
+import androidx.activity.result.ActivityResultLauncher
+
 
 class ManualInputActivity : AppCompatActivity() {
     private var itemName: String? = null
@@ -29,8 +36,12 @@ class ManualInputActivity : AppCompatActivity() {
     private var month: Int? = null
     private var day: Int? = null
     private var dbhelper: DBHelper? = null
+    private var itemImageView: ImageView? = null;
+    private var imageURI: String? = null;
 
-    //    https://guides.codepath.com/android/local-databases-with-sqliteopenhelper
+    private var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>? = null;
+
+    // resources:  https://guides.codepath.com/android/local-databases-with-sqliteopenhelper
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +50,9 @@ class ManualInputActivity : AppCompatActivity() {
 
         initializeViews()
         initializeCurrentDate()
+
         dbhelper = DBHelper(this, null)
+        itemImageView = findViewById<ImageView>(R.id.itemImageView)
 
 
         // initialize the categories spinner to include poultry, dairy goods, etc
@@ -62,6 +75,21 @@ class ManualInputActivity : AppCompatActivity() {
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             reminderSpinner.adapter = adapter
+        }
+
+
+        // initialize photo picker
+        pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            // Callback is invoked after the user selects a media item or closes the
+            // photo picker.
+            if (uri != null) {
+                imageURI = uri.toString();
+                itemImageView?.setImageURI(uri)
+                // store to db
+                Log.d("PhotoPicker", "Selected URI: $uri")
+            } else {
+                Log.d("PhotoPicker", "No media selected")
+            }
         }
     }
 
@@ -125,8 +153,9 @@ class ManualInputActivity : AppCompatActivity() {
             notesEditText!!.text.toString(),
             categoriesSpinner!!.selectedItem.toString(),
             makeDateString(),
-            reminderSpinner!!.selectedItem.toString()
-        )
+            reminderSpinner!!.selectedItem.toString(),
+            imageURI
+            )
 
 
         Log.d("TAG","itemName: " + itemNameEditText?.text.toString())
@@ -134,6 +163,8 @@ class ManualInputActivity : AppCompatActivity() {
         Log.d("TAG","category: " + categoriesSpinner?.selectedItem.toString())
         Log.d("TAG", "expiryDate: " + makeDateString())
         Log.d("TAG","reminder: " + reminderSpinner?.selectedItem.toString())
+        Log.d("TAG","imageURI: " + imageURI.toString())
+
 
         dbhelper?.insertItem(itemDone)
 
@@ -148,6 +179,17 @@ class ManualInputActivity : AppCompatActivity() {
 //        Log.d("TAG", "test_id: "+id)
     }
 
+    fun onEditPhotoButtonClicked(view: View){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Log.d("TAG","test1");
 
+            pickMedia!!.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+
+        }
+        else{
+            Log.d("TAG", "Needs Android Tiramisu or later");
+
+        }
+    }
 
 }
