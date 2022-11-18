@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class ItemAdapter(private val context : Activity, private val arrayList: ArrayList<Item>) : ArrayAdapter<Item>(context,
                   R.layout.list_item, arrayList)    {
@@ -20,10 +24,14 @@ class ItemAdapter(private val context : Activity, private val arrayList: ArrayLi
         val imageView : ImageView = view.findViewById((R.id.itemPic))
         val itemName : TextView = view.findViewById(R.id.itemName)
         val expDate : TextView = view.findViewById(R.id.expiryDate)
+        val warningIcon : ImageView = view.findViewById(R.id.warning_icon)
 
-        arrayList[position].imageId?.let { imageView.setImageResource(it) }
+//        arrayList[position].imageURI?.let { imageView.setImageResource(it) }
         itemName.text = arrayList[position].itemName
         expDate.text = arrayList[position].expiryDate
+
+        setColor(warningIcon, arrayList[position].expiryDate)
+
 
         return view
     }
@@ -53,5 +61,37 @@ class ItemAdapter(private val context : Activity, private val arrayList: ArrayLi
         }
         arrayList.addAll(tempItemList)
         notifyDataSetChanged()
+    }
+
+    fun setColor(imgView: ImageView, expDate: String) {
+        val today = Date()
+        val formatter = SimpleDateFormat("dd/MM/yy")
+        val expiry = formatter.parse(expDate)
+
+        val diff: Long = expiry.getTime() - today.getTime()
+        val diffDays: Long = diff / (1000 * 60 * 60 * 24)
+
+        Log.d("TAG", "DATE: " + diffDays.toString())
+        if (diffDays <= 0)
+            imgView.setColorFilter(
+                ContextCompat.getColor(context, R.color.black),
+                android.graphics.PorterDuff.Mode.SRC_IN
+            );
+        else if (diffDays <= 7)
+            imgView.setColorFilter(
+                ContextCompat.getColor(context, R.color.red),
+                android.graphics.PorterDuff.Mode.SRC_IN
+            );
+        else if (diffDays <= 14)
+            imgView.setColorFilter(
+                ContextCompat.getColor(context, R.color.orange),
+                android.graphics.PorterDuff.Mode.SRC_IN
+            );
+        else
+            imgView.setColorFilter(
+                ContextCompat.getColor(context, R.color.green),
+                android.graphics.PorterDuff.Mode.SRC_IN
+            );
+
     }
 }

@@ -62,7 +62,7 @@ class ListPageActivity : AppCompatActivity() {
 
         itemArrayList = ArrayList()
         for (i in itemName.indices){
-            val item = Item(itemName = itemName[i], expiryDate = expiryDate[i], imageId = imageId[i],
+            val item = Item(itemName = itemName[i], expiryDate = expiryDate[i], imageURI = "",
                 category = "", reminder = "", notes = "")
             itemArrayList.add(item)
         }
@@ -73,12 +73,12 @@ class ListPageActivity : AppCompatActivity() {
         binding.listview.setOnItemClickListener{ parent, view, position, id ->
             val name = itemArrayList[position].itemName
             val exp = itemArrayList[position].expiryDate
-            val imgId = itemArrayList[position].imageId
+            val imageURI = itemArrayList[position].imageURI
 
             val i = Intent(this, ManualInputActivity::class.java)
             i.putExtra("name", name)
             i.putExtra("exp", exp)
-            i.putExtra("imgId", imgId)
+            i.putExtra("imageURI", imageURI)
             startActivity(i)
         }
 

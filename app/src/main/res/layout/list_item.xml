@@ -28,9 +28,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:orientation="vertical">
+                    android:gravity="center"
+                    android:layout_alignParentRight="true">
 
-                    <!--   add the circle icon later     -->
                     <TextView
                         android:id="@+id/itemName"
                         android:layout_width="wrap_content"
@@ -38,7 +38,16 @@
                         android:text="Meiji Milk"
                         android:textColor="@color/black"
                         android:textSize="26sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/circle"
+                        app:tint="@color/green"
+                        android:padding="10dp"
+                        android:id="@+id/warning_icon"/>
+
                 </LinearLayout>
             </LinearLayout>
 

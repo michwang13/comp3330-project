@@ -42,27 +42,27 @@ class CategoriesActivity : AppCompatActivity() {
 
         val categoriesItems = arrayOf(
             arrayListOf<Item>(
-                Item(itemName = "Meiji Milk", expiryDate = "22/12/22", imageId = R.drawable.dummy_image, category = "Poultry", reminder = "", notes = ""),
-                Item(itemName = "Egg", expiryDate = "21/12/22", imageId = R.drawable.egg_image, category = "Poultry", reminder = "", notes = ""),
-                Item(itemName = "Meiji Milk", expiryDate = "20/12/22", imageId = R.drawable.dummy_image, category = "Poultry", reminder = "", notes = ""),
-                Item(itemName = "Egg", expiryDate = "19/12/22", imageId = R.drawable.egg_image, category = "Poultry", reminder = "", notes = ""),
-                Item(itemName = "Meiji Milk", expiryDate = "10/12/22", imageId = R.drawable.dummy_image, category = "Poultry", reminder = "", notes = ""),
+                Item(itemName = "Meiji Milk", expiryDate = "22/12/22", imageURI = "", category = "Poultry", reminder = "", notes = ""),
+                Item(itemName = "Egg", expiryDate = "21/12/22", imageURI = "", category = "Poultry", reminder = "", notes = ""),
+                Item(itemName = "Meiji Milk", expiryDate = "20/12/22", imageURI = "", category = "Poultry", reminder = "", notes = ""),
+                Item(itemName = "Egg", expiryDate = "19/12/22", imageURI = "", category = "Poultry", reminder = "", notes = ""),
+                Item(itemName = "Meiji Milk", expiryDate = "10/12/22", imageURI = "", category = "Poultry", reminder = "", notes = ""),
             ),
             arrayListOf<Item>(
-                Item(itemName = "Meiji Milk", expiryDate = "22/12/22", imageId = R.drawable.dummy_image, category = "Snacks", reminder = "", notes = ""),
-                Item(itemName = "Egg", expiryDate = "21/12/22", imageId = R.drawable.egg_image, category = "Snacks", reminder = "", notes = ""),
+                Item(itemName = "Meiji Milk", expiryDate = "22/12/22", imageURI = "", category = "Snacks", reminder = "", notes = ""),
+                Item(itemName = "Egg", expiryDate = "21/12/22", imageURI = "", category = "Snacks", reminder = "", notes = ""),
             ),
             arrayListOf<Item>(
-                Item(itemName = "Meiji Milk", expiryDate = "22/12/22", imageId = R.drawable.dummy_image, category = "Dairy", reminder = "", notes = ""),
+                Item(itemName = "Meiji Milk", expiryDate = "22/12/22", imageURI = "", category = "Dairy", reminder = "", notes = ""),
             ),
             arrayListOf<Item>(
-                Item(itemName = "Meiji Milk", expiryDate = "22/12/22", imageId = R.drawable.dummy_image, category = "Baked Goods", reminder = "", notes = ""),
-                Item(itemName = "Egg", expiryDate = "21/12/22", imageId = R.drawable.egg_image, category = "Baked Goods", reminder = "", notes = ""),
+                Item(itemName = "Meiji Milk", expiryDate = "22/12/22", imageURI = "", category = "Baked Goods", reminder = "", notes = ""),
+                Item(itemName = "Egg", expiryDate = "21/12/22", imageURI = "", category = "Baked Goods", reminder = "", notes = ""),
             ),
             arrayListOf<Item>(
-                Item(itemName = "Meiji Milk", expiryDate = "22/12/22", imageId = R.drawable.dummy_image, category = "Canned Foods", reminder = "", notes = ""),
-                Item(itemName = "Egg", expiryDate = "21/12/22", imageId = R.drawable.egg_image, category = "Canned Foods", reminder = "", notes = ""),
-                Item(itemName = "Meiji Milk", expiryDate = "22/12/22", imageId = R.drawable.dummy_image, category = "Canned Foods", reminder = "", notes = ""),
+                Item(itemName = "Meiji Milk", expiryDate = "22/12/22", imageURI = "", category = "Canned Foods", reminder = "", notes = ""),
+                Item(itemName = "Egg", expiryDate = "21/12/22", imageURI = "", category = "Canned Foods", reminder = "", notes = ""),
+                Item(itemName = "Meiji Milk", expiryDate = "22/12/22", imageURI = "", category = "Canned Foods", reminder = "", notes = ""),
             ),
         )
 

@@ -30,7 +30,6 @@ class ManualInputActivity : AppCompatActivity() {
     private var notesEditText: EditText? = null
     private var categoriesSpinner: Spinner? = null
     private var reminderSpinner: Spinner? = null
-    private var itemImageView: ImageView? = null
 
     private var datePickerButton: Button? = null
 
@@ -232,9 +231,8 @@ class ManualInputActivity : AppCompatActivity() {
 
         dbhelper?.insertItem(itemDone)
 
-
-
-
+        val i = Intent(this, ListPageActivity::class.java)
+        startActivity(i)
         // below code is for sample use only
 //        val cursor = dbhelper?.queryData();
 ////        val id = cursor.getString(cursor.getColumnIndex()) // id is first column in db

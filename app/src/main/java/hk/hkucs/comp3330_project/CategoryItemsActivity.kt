@@ -48,7 +48,7 @@ class CategoryItemsActivity : AppCompatActivity()  {
         binding.listview.setOnItemClickListener{ parent, view, position, id ->
             val name = itemArrayList[position].itemName
             val exp = itemArrayList[position].expiryDate
-            val imgId = itemArrayList[position].imageId
+            val imgId = itemArrayList[position].imageURI
 
             val i = Intent(this, ManualInputActivity::class.java)
             i.putExtra("name", name)
