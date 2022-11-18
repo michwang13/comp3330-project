@@ -73,7 +73,7 @@ class ItemAdapter(private val context : Activity, private val arrayList: ArrayLi
         val diff: Long = expiry.getTime() - today.getTime()
         val diffDays: Long = diff / (1000 * 60 * 60 * 24)
 
-        if (diffDays <= 0)
+        if (diffDays < 0)
             imgView.setColorFilter(
                 ContextCompat.getColor(context, R.color.black),
                 android.graphics.PorterDuff.Mode.SRC_IN
