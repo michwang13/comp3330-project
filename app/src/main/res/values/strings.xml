@@ -3,7 +3,7 @@
 
     <string-array name="categories_array">
         <item>Meat</item>
-        <item>Snacks</item>
+        <item>Snack</item>
         <item>Dairy</item>
         <item>Baked Goods</item>
         <item>Others</item>

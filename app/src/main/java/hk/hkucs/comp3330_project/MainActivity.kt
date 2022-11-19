@@ -35,9 +35,9 @@ class MainActivity : AppCompatActivity() {
                 "Dairy",
                 "Dairy",
                 "Baked Goods",
-                "Snacks",
-                "Snacks",
-                "Snacks",
+                "Snack",
+                "Snack",
+                "Snack",
                 "Others",
                 "Meat",
             )
