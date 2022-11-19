@@ -15,16 +15,17 @@ import java.util.*
 class DBHelper(context: Context?, factory: SQLiteDatabase.CursorFactory?) : SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
 
     companion object {
-        private val DATABASE_NAME = "TEST"
-        // below is the variable for database version
+        private val DATABASE_NAME = "TEST2"
+    // below is the variable for database version
         private val DATABASE_VERSION = 1
         const val CONTACTS_TABLE_NAME = "items"
         const val CONTACTS_COLUMN_ID = "id"
         const val CONTACTS_COLUMN_NAME = "itemName"
         const val CONTACTS_COLUMN_NOTES = "notes"
         const val CONTACTS_COLUMN_CATEGORY = "category"
-        const val CONTACTS_COLUMN_ = "expiryDate"
+        const val CONTACTS_COLUMN_EXP = "expiryDate"
         const val CONTACTS_COLUMN_PHONE = "reminder"
+        const val CONTACTS_COLUMN_URI = "imageURI"
     }
     override fun onCreate(db: SQLiteDatabase?) {
         Log.d("TAG","TESTTTTT------")
@@ -34,6 +35,7 @@ class DBHelper(context: Context?, factory: SQLiteDatabase.CursorFactory?) : SQLi
                 "notes TEXT, " +
                 "category TEXT, " +
                 "expiryDate TEXT, " +
+                "imageURI TEXT, " +
                 "reminder TEXT)")
 //            "create table items (id text primary key, itemName text, notes text, category text, expiryDate text, reminder text)"
 
@@ -57,6 +59,7 @@ class DBHelper(context: Context?, factory: SQLiteDatabase.CursorFactory?) : SQLi
         contentValues.put("category", item.category)
         contentValues.put("expiryDate", item.expiryDate)
         contentValues.put("reminder", item.reminder)
+        contentValues.put("imageURI", item.imageURI)
         db.insert("items", null, contentValues)
         return true
     }

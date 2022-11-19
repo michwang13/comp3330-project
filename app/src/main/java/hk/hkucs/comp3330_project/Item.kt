@@ -1,6 +1,8 @@
 package hk.hkucs.comp3330_project
 
-class Item(itemID: String?, itemName: String?, notes: String?, category: String?, expiryDate: String?, reminder: String?, imageURI: String?) {
+import java.util.*
+
+class Item( itemID:String?, itemName: String?, notes: String?, category: String?, expiryDate: String?, reminder: String?, imageURI: String?) {
     var itemID: String
     var itemName: String
     var notes: String
@@ -10,7 +12,7 @@ class Item(itemID: String?, itemName: String?, notes: String?, category: String?
     var imageURI: String
 
     init{
-        this.itemID = itemID ?: ""
+        this.itemID = itemID ?: UUID.randomUUID().toString()
         this.itemName = itemName ?: ""
         this.notes = notes ?: ""
         this.category = category ?: ""
