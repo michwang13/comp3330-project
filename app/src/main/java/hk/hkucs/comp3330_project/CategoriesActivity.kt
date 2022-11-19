@@ -71,7 +71,7 @@ class CategoriesActivity : AppCompatActivity() {
                     startActivity(Intent(this, ListPageActivity::class.java))
                 }
                 R.id.scan -> {
-                    startActivity(Intent(this, ListPageActivity::class.java))
+                    startActivity(Intent(this, CodeScannerActivity::class.java))
                 }
                 R.id.categories -> {
                     startActivity(Intent(this, CategoriesActivity::class.java))

@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.COMP3330project">
         <activity
-            android:name=".CodeScanner"
+            android:name=".CodeScannerActivity"
             android:exported="false"
             android:label="@string/title_activity_code_scanner"
             android:theme="@style/Theme.COMP3330project.NoActionBar">
