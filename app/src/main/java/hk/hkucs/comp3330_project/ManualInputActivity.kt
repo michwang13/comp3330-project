@@ -301,6 +301,18 @@ class ManualInputActivity : AppCompatActivity() {
 //        Log.d("TAG", "test_id: "+id)
     }
 
+    fun onDeleteButtonClicked(view: View) {
+        val cursor = dbhelper?.getOneItemByID(currentItemID)
+        if (cursor != null && cursor.moveToFirst()){
+            dbhelper?.deleteOneItemByID(currentItemID)
+            Toast.makeText(this, "Item deleted!", Toast.LENGTH_SHORT).show()
+            val i = Intent(this, ListPageActivity::class.java)
+            startActivity(i)
+        } else {
+            Toast.makeText(this, "Item not in database!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     fun onEditPhotoButtonClicked(view: View){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             Log.d("TAG","test1");

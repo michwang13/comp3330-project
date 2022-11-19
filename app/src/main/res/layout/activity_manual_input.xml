@@ -50,7 +50,7 @@
 
                 <Button
                     android:id="@+id/editPhotoButton"
-                    android:layout_width="150dp"
+                    android:layout_width="130dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:text="Edit Photo"
@@ -59,6 +59,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/itemImageView"
+                    android:backgroundTint="#bcbcbc"
                     />
 
             </LinearLayout>
@@ -100,6 +101,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
                             android:padding="10dp"
+                            android:background="@null"
                             />
                     </LinearLayout>
 
@@ -129,6 +131,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
                             android:paddingLeft="10dp"
+                            android:background="@null"
                             />
                     </LinearLayout>
                 </LinearLayout>
@@ -188,7 +191,7 @@
                             android:id="@+id/datePickerButton"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="JAN 01 2020"
+                            android:text="1/1/2020"
                             android:textSize="15sp"
                             android:textColor="@color/black"
                             android:color="#000000"
@@ -234,6 +237,16 @@
                     android:layout_gravity="center"
                     android:text="Done"
                     android:onClick="onDoneButtonClicked"
+                    />
+
+                <Button
+                    android:id="@+id/deleteButton"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:text="Delete"
+                    android:backgroundTint="#C70000"
+                    android:onClick="onDeleteButtonClicked"
                     />
 
             </LinearLayout>
