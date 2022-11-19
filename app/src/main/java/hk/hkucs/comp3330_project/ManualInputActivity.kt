@@ -159,8 +159,7 @@ class ManualInputActivity : AppCompatActivity() {
                         updateDatePicker()
 
                         categoriesSpinner.setSelection(categoriesSpinnerAdapter.getPosition(category))
-
-                        reminderSpinner.setSelection(categoriesSpinnerAdapter.getPosition(reminder))
+                        reminderSpinner.setSelection(reminderSpinnerAdapter.getPosition(reminder))
                     }
                     currentItemID = itemID
                 }
@@ -205,34 +204,6 @@ class ManualInputActivity : AppCompatActivity() {
     }
 
     fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
-
-
-    private fun prefillForm(itemID: String){
-        val cursor = dbhelper?.getOneItemByID(itemID)
-        if (cursor!!.moveToFirst()){
-            val itemName = cursor.getString(cursor.getColumnIndexOrThrow("itemName"))
-            val expiryDate = cursor.getString(cursor.getColumnIndexOrThrow("expiryDate"))
-            val imageURI = cursor.getString(cursor.getColumnIndexOrThrow("imageURI"))
-            val category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
-            val notes = cursor.getString(cursor.getColumnIndexOrThrow("notes"))
-            val reminder = cursor.getString(cursor.getColumnIndexOrThrow("reminder"))
-            cursor.close()
-
-
-            itemNameEditText?.setText(itemName.toEditable())
-            notesEditText?.setText(notes.toEditable())
-            itemImageView?.setImageURI(Uri.parse(imageURI))
-
-            setExpiryDate(expiryDate)
-            updateDatePicker()
-
-            categoriesSpinner!!.setSelection(categoriesSpinnerAdapter.getPosition(category))
-
-            reminderSpinner!!.setSelection(categoriesSpinnerAdapter.getPosition(reminder))
-
-        }
-
-    }
 
     private fun updateDatePicker(){
         datePickerButton?.text = makeDateString()
