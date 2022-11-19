@@ -314,7 +314,7 @@ class ManualInputActivity : AppCompatActivity() {
     }
 
     fun onEditPhotoButtonClicked(view: View){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             Log.d("TAG","test1");
 
             pickMedia!!.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
