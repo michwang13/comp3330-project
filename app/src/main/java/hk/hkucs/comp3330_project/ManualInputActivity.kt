@@ -1,6 +1,7 @@
 package hk.hkucs.comp3330_project
 
-import android.app.DatePickerDialog
+import android.app.*
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -15,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
+import kotlin.math.min
 
 
 class ManualInputActivity : AppCompatActivity() {
@@ -24,6 +26,7 @@ class ManualInputActivity : AppCompatActivity() {
     private var expiryDate: String = ""
     private var reminder: String = ""
     private var currentItemID: String = UUID.randomUUID().toString()
+    private var currentItemNotifID: Int = currentItemID.replace("-", "").filter { it.isDigit() }[0].toInt()
 
     private var itemNameEditText: EditText? = null
     private var notesEditText: EditText? = null
@@ -35,9 +38,9 @@ class ManualInputActivity : AppCompatActivity() {
 
     private var datePickerButton: Button? = null
 
-    private var year: Int? = null
-    private var month: Int? = null
-    private var day: Int? = null
+    private var year: Int = 0
+    private var month: Int = 0
+    private var day: Int = 0
     private var dbhelper: DBHelper? = null
     private var itemImageView: ImageView? = null;
     private var imageURI: String? = null;
@@ -52,6 +55,8 @@ class ManualInputActivity : AppCompatActivity() {
         setContentView(R.layout.activity_manual_input)
 
         initializeViews()
+
+        createNotificationChannel() // Initialize a notification channel
 
         dbhelper = DBHelper(this, null)
         itemImageView = findViewById<ImageView>(R.id.itemImageView)
@@ -164,6 +169,11 @@ class ManualInputActivity : AppCompatActivity() {
                 itemNameIntent?.let{
                     itemName = itemNameIntent
                     itemNameEditText?.setText(itemName.toEditable())
+                }
+
+                val notifIDIntent: String? = getString("notifID")
+                notifIDIntent?.let{
+                    currentItemNotifID = notifIDIntent.toInt()
                 }
 
                 val categoryIntent: String? = getString("category")
@@ -283,11 +293,12 @@ class ManualInputActivity : AppCompatActivity() {
             dbhelper?.insertItem(itemDone)
         }
 
-
+        scheduleNotification()
 
         val i = Intent(this, ListPageActivity::class.java)
         startActivity(i)
-        // below code is for sample use only
+
+// ----------------------------- SAMPLE CODE -----------------------------------
 //        val cursor = dbhelper?.queryData();
 ////        val id = cursor.getString(cursor.getColumnIndex()) // id is first column in db
 //        cursor?.moveToFirst();
@@ -306,6 +317,64 @@ class ManualInputActivity : AppCompatActivity() {
             Log.d("TAG", "Needs Android Tiramisu or later");
 
         }
+    }
+
+    private fun scheduleNotification() {
+        val intent = Intent(applicationContext, Notification::class.java)
+        val title = "Your " + itemNameEditText!!.text.toString() + " is expiring!"
+        val message = "You have set a reminder for this item, click the notification to check your items"
+        intent.putExtra(titleExtra, title)
+        intent.putExtra(messageExtra, message)
+
+        notificationID = currentItemNotifID
+        Log.d("TAG", "ID FOR NOTIF: " + notificationID)
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            applicationContext,
+            notificationID,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        // Logic to reduce expiry date with reminder days
+        val calendar = Calendar.getInstance()
+        setExpiryDate(expiryDate)
+        calendar.set(year, month, day)
+//        Log.d("Calendar Date", "Before Add: $calendar")
+        val addDay = reminderSpinner!!.selectedItem.toString().filter { it.isDigit() }
+//        Log.d("Calendar Date", "Reduce By: ${-Math.abs(addDay.toInt())}")
+        calendar.add(Calendar.DATE, -Math.abs(addDay.toInt()))
+        calendar.add(Calendar.DATE, -30)
+//        Log.d("Calendar Date", "After Add: $calendar")
+
+        // Change time to 8 AM on that date
+        val minute = 0
+        val hour = 8
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val month = calendar.get(Calendar.MONTH)
+        val year = calendar.get(Calendar.YEAR)
+        calendar.set(year, month, day, hour, minute)
+//        Log.d("Calendar Date", "After Set Time: $calendar")
+
+        val time = calendar.timeInMillis
+        Log.d("Calendar Date", "timeInMillis: $time")
+
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            time,
+            pendingIntent
+        )
+    }
+
+    fun createNotificationChannel() {
+        val name = "Notification Channel"
+        val desc = "Channel description"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channel = NotificationChannel(channelID, name, importance)
+        channel.description = desc
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
     }
 
 }
