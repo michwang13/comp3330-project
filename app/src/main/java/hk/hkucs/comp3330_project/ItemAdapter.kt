@@ -70,7 +70,7 @@ class ItemAdapter(private val context : Activity, private val arrayList: ArrayLi
         val formatter = SimpleDateFormat("dd/MM/yyyy")
         val expiry = formatter.parse(expDate)
 
-        val diff: Long = expiry.getTime() - today.getTime()
+        val diff: Long = expiry.time - today.time
         val diffDays: Long = diff / (1000 * 60 * 60 * 24)
 
         if (diffDays < 0)
