@@ -15,6 +15,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.min
 
@@ -124,7 +125,7 @@ class ManualInputActivity : AppCompatActivity() {
                     startActivity(Intent(this, ListPageActivity::class.java))
                 }
                 R.id.scan -> {
-                    startActivity(Intent(this, ListPageActivity::class.java))
+                    startActivity(Intent(this, CodeScannerActivity::class.java))
                 }
                 R.id.categories -> {
                     startActivity(Intent(this, CategoriesActivity::class.java))
@@ -168,6 +169,7 @@ class ManualInputActivity : AppCompatActivity() {
                 itemNameIntent?.let{
                     itemName = itemNameIntent
                     itemNameEditText?.setText(itemName.toEditable())
+                    initializeCurrentDate()
                 }
 
                 val notifIDIntent: String? = getString("notifID")
@@ -179,6 +181,7 @@ class ManualInputActivity : AppCompatActivity() {
                 categoryIntent?.let{
                     category = categoryIntent
                     categoriesSpinner.setSelection(categoriesSpinnerAdapter.getPosition(category))
+                    initializeCurrentDate()
                 }
             }
         } ?: run {
@@ -187,10 +190,13 @@ class ManualInputActivity : AppCompatActivity() {
     }
 
     private fun initializeCurrentDate(){
-        val c = Calendar.getInstance()
-        year = c.get(Calendar.YEAR)
-        month = c.get(Calendar.MONTH) + 1           // plus 1 bcs month is 0-indexed
-        day = c.get(Calendar.DAY_OF_MONTH)
+        val today = Date()
+        val formatter = SimpleDateFormat("dd/MM/yyyy")
+        setExpiryDate(formatter.format(today))
+//        val c = Calendar.getInstance()
+//        year = c.get(Calendar.YEAR)
+//        month = c.get(Calendar.MONTH) + 1           // plus 1 bcs month is 0-indexed
+//        day = c.get(Calendar.DAY_OF_MONTH)
         updateDatePicker()
     }
 
@@ -277,8 +283,20 @@ class ManualInputActivity : AppCompatActivity() {
 //        Log.d("TAG", "test_id: "+id)
     }
 
+    fun onDeleteButtonClicked(view: View) {
+        val cursor = dbhelper?.getOneItemByID(currentItemID)
+        if (cursor != null && cursor.moveToFirst()){
+            dbhelper?.deleteOneItemByID(currentItemID)
+            Toast.makeText(this, "Item deleted!", Toast.LENGTH_SHORT).show()
+            val i = Intent(this, ListPageActivity::class.java)
+            startActivity(i)
+        } else {
+            Toast.makeText(this, "Item not in database!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     fun onEditPhotoButtonClicked(view: View){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             Log.d("TAG","test1");
 
             pickMedia!!.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))

@@ -3,7 +3,7 @@
 
     <string-array name="categories_array">
         <item>Meat</item>
-        <item>Snacks</item>
+        <item>Snack</item>
         <item>Dairy</item>
         <item>Baked Goods</item>
         <item>Others</item>
@@ -15,4 +15,14 @@
         <item>7 days</item>
         <item>30 days</item>
     </string-array>
+    <string name="title_activity_qr_scanner">QrScannerActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_code_scanner">CodeScanner</string>
 </resources>
