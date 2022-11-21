@@ -15,7 +15,7 @@ import java.util.*
 class DBHelper(context: Context?, factory: SQLiteDatabase.CursorFactory?) : SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
 
     companion object {
-        private val DATABASE_NAME = "TEST2"
+        private val DATABASE_NAME = "DATABASE"
     // below is the variable for database version
         private val DATABASE_VERSION = 1
         const val CONTACTS_TABLE_NAME = "items"
@@ -30,13 +30,14 @@ class DBHelper(context: Context?, factory: SQLiteDatabase.CursorFactory?) : SQLi
     override fun onCreate(db: SQLiteDatabase?) {
         Log.d("TAG","TESTTTTT------")
         val CREATE_TABLE_QUERY =
-            ("CREATE TABLE ITEMS" + " (ID TEXT PRIMARY KEY, " +
+            ("CREATE TABLE ITEMS" + " (ID TEXT, " +
                 "itemName TEXT, " +
                 "notes TEXT, " +
                 "category TEXT, " +
                 "expiryDate TEXT, " +
                 "imageURI TEXT, " +
-                "reminder TEXT)")
+                "reminder TEXT, " +
+                "notifID INTEGER PRIMARY KEY AUTOINCREMENT)")
 //            "create table items (id text primary key, itemName text, notes text, category text, expiryDate text, reminder text)"
 
         db!!.execSQL(CREATE_TABLE_QUERY)

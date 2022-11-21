@@ -14,6 +14,7 @@ import hk.hkucs.comp3330_project.databinding.ActivityCategoryItemsBinding
 class CategoryItemsActivity : AppCompatActivity()  {
     private lateinit var binding: ActivityCategoryItemsBinding
     private lateinit var itemArrayList : ArrayList<Item>
+    private lateinit var notifIDList : ArrayList<String>
     private lateinit var searchView: SearchView
     private lateinit var sortImageButton: ImageButton
     private lateinit var backButton: ImageButton
@@ -22,6 +23,9 @@ class CategoryItemsActivity : AppCompatActivity()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        notifIDList = ArrayList()
+
         binding = ActivityCategoryItemsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         dbhelper = DBHelper(this, null)
@@ -43,6 +47,7 @@ class CategoryItemsActivity : AppCompatActivity()  {
         binding.listview.setOnItemClickListener{ parent, view, position, id ->
             val i = Intent(this, ManualInputActivity::class.java)
             i.putExtra("itemID", itemArrayList[position].itemID)
+            i.putExtra("notifID", notifIDList[position])
             startActivity(i)
 
         }
@@ -112,10 +117,12 @@ class CategoryItemsActivity : AppCompatActivity()  {
             val category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
             val notes = cursor.getString(cursor.getColumnIndexOrThrow("notes"))
             val reminder = cursor.getString(cursor.getColumnIndexOrThrow("reminder"))
+            var notifID = cursor.getString(cursor.getColumnIndexOrThrow("notifID"))
 
             var item = Item(itemID = itemID, itemName = itemName, expiryDate = expiryDate, imageURI = imageURI,
                 category = category, reminder = reminder, notes = notes)
             itemArrayList.add(item)
+            notifIDList.add(notifID)
             // moving cursor to next position and log next values
             while(cursor.moveToNext()){
                 var itemID = cursor.getString(cursor.getColumnIndexOrThrow("ID"))
@@ -125,10 +132,12 @@ class CategoryItemsActivity : AppCompatActivity()  {
                 var category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
                 var notes = cursor.getString(cursor.getColumnIndexOrThrow("notes"))
                 var reminder = cursor.getString(cursor.getColumnIndexOrThrow("reminder"))
+                var notifID = cursor.getString(cursor.getColumnIndexOrThrow("notifID"))
 
                 var item = Item(itemID = itemID, itemName = itemName, expiryDate = expiryDate, imageURI = imageURI,
                     category = category, reminder = reminder, notes = notes)
                 itemArrayList.add(item)
+                notifIDList.add(notifID)
             }
 
             // close cursor
