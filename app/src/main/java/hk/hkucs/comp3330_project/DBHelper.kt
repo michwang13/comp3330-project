@@ -101,6 +101,7 @@ class DBHelper(context: Context?, factory: SQLiteDatabase.CursorFactory?) : SQLi
         contentValues.put("category", item.category)
         contentValues.put("expiryDate", item.expiryDate)
         contentValues.put("reminder", item.reminder)
+        contentValues.put("imageURI",item.imageURI)
 
         val db = this.writableDatabase
         db.update("items", contentValues, "ID='$id'", arrayOf())

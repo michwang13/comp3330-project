@@ -105,6 +105,7 @@ class ManualInputActivity : AppCompatActivity() {
 
 
         // initialize photo picker
+
         pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             // Callback is invoked after the user selects a media item or closes the
             // photo picker.
@@ -256,6 +257,8 @@ class ManualInputActivity : AppCompatActivity() {
             reminderSpinner!!.selectedItem.toString(),
             imageURI
             )
+        val flag = Intent.FLAG_GRANT_READ_URI_PERMISSION
+        contentResolver.takePersistableUriPermission(Uri.parse(imageURI), flag)
 
 //        Log.d("TAG","itemName: " + itemNameEditText?.text.toString())
 //        Log.d("TAG","notes: " + notesEditText?.text.toString())
