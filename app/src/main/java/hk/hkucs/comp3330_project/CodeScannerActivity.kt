@@ -77,7 +77,7 @@ class CodeScannerActivity : AppCompatActivity() {
                 doAsync{
                     val response =
                         Unirest.get("https://chomp-food-nutrition-database-v2.p.rapidapi.com/food/branded/barcode.php?code=${barcodeNum} \n")
-                            .header("X-RapidAPI-Key", "2db1950c03mshddf89187ce9abdcp156e5ajsn88b1399658d8")
+                            .header("X-RapidAPI-Key", "94c75bd9bfmsh7bfbbbb4b10c945p1d9de5jsnf7a0b9e847e1")
                             .header("X-RapidAPI-Host", "chomp-food-nutrition-database-v2.p.rapidapi.com")
                             .asString()
                     val all = response.body
