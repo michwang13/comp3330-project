@@ -175,6 +175,7 @@ class ManualInputActivity : AppCompatActivity() {
                 val notifIDIntent: String? = getString("notifID")
                 notifIDIntent?.let{
                     currentItemNotifID = notifIDIntent.toInt()
+                    initializeCurrentDate()
                 }
 
                 val categoryIntent: String? = getString("category")
@@ -327,7 +328,7 @@ class ManualInputActivity : AppCompatActivity() {
 
         // Logic to reduce expiry date with reminder days
         val calendar = Calendar.getInstance()
-        setExpiryDate(expiryDate)
+//        setExpiryDate(expiryDate)
         calendar.set(year, month, day)
 //        Log.d("Calendar Date", "Before Add: $calendar")
         val addDay = reminderSpinner!!.selectedItem.toString().filter { it.isDigit() }
