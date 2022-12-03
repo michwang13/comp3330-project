@@ -123,7 +123,7 @@ class CategoryItemsActivity : AppCompatActivity()  {
                 category = category, reminder = reminder, notes = notes)
             itemArrayList.add(item)
             notifIDList.add(notifID)
-            // moving cursor to next position and log next values
+
             while(cursor.moveToNext()){
                 var itemID = cursor.getString(cursor.getColumnIndexOrThrow("ID"))
                 var itemName = cursor.getString(cursor.getColumnIndexOrThrow("itemName"))
@@ -140,7 +140,6 @@ class CategoryItemsActivity : AppCompatActivity()  {
                 notifIDList.add(notifID)
             }
 
-            // close cursor
             cursor.close()
 
         }

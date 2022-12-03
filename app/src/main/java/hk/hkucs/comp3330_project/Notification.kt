@@ -23,5 +23,3 @@ class Notification : BroadcastReceiver() {
         manager.notify(notificationID, notification)
     }
 }
-
-//class ItemAdapter(private val context : Activity, private val arrayList: ArrayList<Item>)

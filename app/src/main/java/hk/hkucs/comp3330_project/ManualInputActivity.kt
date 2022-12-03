@@ -48,16 +48,13 @@ class ManualInputActivity : AppCompatActivity() {
 
     private var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>? = null;
 
-    // resources:  https://guides.codepath.com/android/local-databases-with-sqliteopenhelper
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manual_input)
 
         initializeViews()
 
-        createNotificationChannel() // Initialize a notification channel
+        createNotificationChannel()
 
         dbhelper = DBHelper(this, null)
         itemImageView = findViewById<ImageView>(R.id.itemImageView)
@@ -83,36 +80,10 @@ class ManualInputActivity : AppCompatActivity() {
         reminderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         reminderSpinner.adapter = reminderSpinnerAdapter
 
-        // initialize the categories spinner to include poultry, dairy goods, etc
-//        ArrayAdapter.createFromResource(
-//            this,
-//            R.array.categories_array,           //strings.xml
-//            android.R.layout.simple_spinner_item
-//        ).also { adapter ->
-//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//            categoriesSpinner.adapter = adapter
-//        }
-
-        // initialize the categories spinner to include poultry, dairy goods, etc
-//        ArrayAdapter.createFromResource(
-//            this,
-//            R.array.reminder_array,           //strings.xml
-//            android.R.layout.simple_spinner_item
-//        ).also { adapter ->
-//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//            reminderSpinner.adapter = adapter
-//        }
-
-
-        // initialize photo picker
-
         pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-            // Callback is invoked after the user selects a media item or closes the
-            // photo picker.
             if (uri != null) {
                 imageURI = uri.toString();
                 itemImageView?.setImageURI(uri)
-                // store to db
                 Log.d("PhotoPicker", "Selected URI: $uri")
             } else {
                 Log.d("PhotoPicker", "No media selected")
@@ -195,10 +166,6 @@ class ManualInputActivity : AppCompatActivity() {
         val today = Date()
         val formatter = SimpleDateFormat("dd/MM/yyyy")
         setExpiryDate(formatter.format(today))
-//        val c = Calendar.getInstance()
-//        year = c.get(Calendar.YEAR)
-//        month = c.get(Calendar.MONTH) + 1           // plus 1 bcs month is 0-indexed
-//        day = c.get(Calendar.DAY_OF_MONTH)
         updateDatePicker()
     }
 
@@ -221,9 +188,8 @@ class ManualInputActivity : AppCompatActivity() {
 
          val datePickerDialog = DatePickerDialog(this, { _, yearPicked, monthPicked, dayPicked ->
 
-             // Display Selected date in textbox
              year = yearPicked
-             month = monthPicked + 1 // because month is 0-indexed
+             month = monthPicked + 1
              day = dayPicked
              updateDatePicker()
          }, year!!, month!!-1, day!!)
@@ -260,13 +226,6 @@ class ManualInputActivity : AppCompatActivity() {
         val flag = Intent.FLAG_GRANT_READ_URI_PERMISSION
         contentResolver.takePersistableUriPermission(Uri.parse(imageURI), flag)
 
-//        Log.d("TAG","itemName: " + itemNameEditText?.text.toString())
-//        Log.d("TAG","notes: " + notesEditText?.text.toString())
-//        Log.d("TAG","category: " + categoriesSpinner?.selectedItem.toString())
-//        Log.d("TAG", "expiryDate: " + makeDateString())
-//        Log.d("TAG","reminder: " + reminderSpinner?.selectedItem.toString())
-//        Log.d("TAG","imageURI: " + imageURI.toString())
-
         val cursor = dbhelper?.getOneItemByID(currentItemID)
         if (cursor != null && cursor.moveToFirst()){
             dbhelper?.updateOneItemByID(currentItemID, itemDone)
@@ -278,13 +237,6 @@ class ManualInputActivity : AppCompatActivity() {
 
         val i = Intent(this, ListPageActivity::class.java)
         startActivity(i)
-
-// ----------------------------- SAMPLE CODE -----------------------------------
-//        val cursor = dbhelper?.queryData();
-////        val id = cursor.getString(cursor.getColumnIndex()) // id is first column in db
-//        cursor?.moveToFirst();
-//        val id = cursor?.getString(0) // id is first column in db
-//        Log.d("TAG", "test_id: "+id)
     }
 
     fun onDeleteButtonClicked(view: View) {
@@ -301,7 +253,6 @@ class ManualInputActivity : AppCompatActivity() {
 
     fun onEditPhotoButtonClicked(view: View){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            Log.d("TAG","test1");
 
             pickMedia!!.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
 
@@ -320,7 +271,6 @@ class ManualInputActivity : AppCompatActivity() {
         intent.putExtra(messageExtra, message)
 
         notificationID = currentItemNotifID
-        Log.d("TAG", "ID FOR NOTIF: " + notificationID)
 
         val pendingIntent = PendingIntent.getBroadcast(
             applicationContext,
@@ -329,28 +279,20 @@ class ManualInputActivity : AppCompatActivity() {
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-        // Logic to reduce expiry date with reminder days
         val calendar = Calendar.getInstance()
-//        setExpiryDate(expiryDate)
         calendar.set(year, month, day)
-//        Log.d("Calendar Date", "Before Add: $calendar")
         val addDay = reminderSpinner!!.selectedItem.toString().filter { it.isDigit() }
-//        Log.d("Calendar Date", "Reduce By: ${-Math.abs(addDay.toInt())}")
         calendar.add(Calendar.DATE, -Math.abs(addDay.toInt()))
         calendar.add(Calendar.DATE, -30)
-//        Log.d("Calendar Date", "After Add: $calendar")
 
-        // Change time to 8 AM on that date
         val minute = 0
         val hour = 8
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         val month = calendar.get(Calendar.MONTH)
         val year = calendar.get(Calendar.YEAR)
         calendar.set(year, month, day, hour, minute)
-//        Log.d("Calendar Date", "After Set Time: $calendar")
 
         val time = calendar.timeInMillis
-        Log.d("Calendar Date", "timeInMillis: $time")
 
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.setExactAndAllowWhileIdle(
