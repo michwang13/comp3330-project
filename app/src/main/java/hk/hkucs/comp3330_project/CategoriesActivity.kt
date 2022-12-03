@@ -98,7 +98,6 @@ class CategoriesActivity : AppCompatActivity() {
                 category = category, reminder = reminder, notes = notes)
             itemArrayList.add(item)
 
-            // moving cursor to next position and log next values
             while(cursor.moveToNext()){
                 itemID = cursor.getString(cursor.getColumnIndexOrThrow("ID"))
                 itemName = cursor.getString(cursor.getColumnIndexOrThrow("itemName"))
@@ -113,7 +112,6 @@ class CategoriesActivity : AppCompatActivity() {
                 itemArrayList.add(item)
             }
 
-            // close cursor
             cursor.close()
         }
         return itemArrayList

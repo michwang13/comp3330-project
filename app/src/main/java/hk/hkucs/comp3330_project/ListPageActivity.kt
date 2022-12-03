@@ -45,7 +45,6 @@ class ListPageActivity : AppCompatActivity() {
                 category = category, reminder = reminder, notes = notes)
             itemArrayList.add(item)
             notifIDList.add(notifID)
-            // moving cursor to next position and log next values
             while(cursor.moveToNext()){
                 itemID = cursor.getString(cursor.getColumnIndexOrThrow("ID"))
                 itemName = cursor.getString(cursor.getColumnIndexOrThrow("itemName"))
@@ -62,7 +61,6 @@ class ListPageActivity : AppCompatActivity() {
                 notifIDList.add(notifID)
             }
 
-            // close cursor
             cursor.close()
 
         }

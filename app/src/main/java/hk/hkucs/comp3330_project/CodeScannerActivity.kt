@@ -88,10 +88,7 @@ class CodeScannerActivity : AppCompatActivity() {
                     }
                     else{
                         name = getItemName(all)
-                        Log.d("NAME SUCCESS",name)
                         category = getCategory(all)
-                        Log.d("CAT SUCCESS",category)
-                        Log.d("TAG","end of print")
                     }
                     i.putExtra("itemName", name)
                     i.putExtra("category",category)
@@ -113,9 +110,7 @@ class CodeScannerActivity : AppCompatActivity() {
 
     private fun getItemName(result: String): String {
         val tempIndex = (result.indexOf("name").toString()).toInt()
-        //+8 because name": " is of length 7
         val startingIndexName = tempIndex + 8
-        //Retrieve index of '"' starting after the word '"name": "'
         val endIndexName = (result.indexOf('"', startingIndexName).toString()).toInt() - 1
         return result.slice(startingIndexName..endIndexName)
 
@@ -141,7 +136,6 @@ class CodeScannerActivity : AppCompatActivity() {
                 mutableKeywords.set(i,mutableKeywords[i].replace(",",""))
                 mutableKeywords.set(i,mutableKeywords[i].drop(1))
                 mutableKeywords.set(i,mutableKeywords[i].dropLast(2))
-                Log.d("TAG",mutableKeywords[i])
             }
             
             val res: Resources = resources
