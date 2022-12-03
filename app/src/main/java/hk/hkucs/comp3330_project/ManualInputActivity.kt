@@ -223,8 +223,6 @@ class ManualInputActivity : AppCompatActivity() {
             reminderSpinner!!.selectedItem.toString(),
             imageURI
             )
-        val flag = Intent.FLAG_GRANT_READ_URI_PERMISSION
-        contentResolver.takePersistableUriPermission(Uri.parse(imageURI), flag)
 
         val cursor = dbhelper?.getOneItemByID(currentItemID)
         if (cursor != null && cursor.moveToFirst()){
